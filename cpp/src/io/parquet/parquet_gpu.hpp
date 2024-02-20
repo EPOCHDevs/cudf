@@ -373,7 +373,7 @@ struct ColumnChunkDesc {
                            uint8_t rep_level_bits_,
                            int8_t codec_,
                            int8_t converted_type_,
-                           thrust::optional<LogicalType> logical_type_,
+                           std::optional<LogicalType> logical_type_,
                            int8_t decimal_precision_,
                            int32_t ts_clock_rate_,
                            int32_t src_col_index_,
@@ -427,7 +427,7 @@ struct ColumnChunkDesc {
   void** column_string_base{};                   // base pointers of column string data
   int8_t codec{};                                // compressed codec enum
   int8_t converted_type{};                       // converted type enum
-  thrust::optional<LogicalType> logical_type{};  // logical type
+  std::optional<LogicalType> logical_type{};  // logical type
   int8_t decimal_precision{};                    // Decimal precision
   int32_t ts_clock_rate{};  // output timestamp clock frequency (0=default, 1000=ms, 1000000000=ns)
 

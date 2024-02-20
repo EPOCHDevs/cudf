@@ -41,7 +41,7 @@
 #include <thrust/generate.h>
 #include <thrust/iterator/reverse_iterator.h>
 #include <thrust/mismatch.h>
-#include <thrust/optional.h>
+#include <optional>
 #include <thrust/pair.h>
 
 using cudf::device_span;
@@ -485,7 +485,7 @@ CUDF_KERNEL void collect_keys_info_kernel(parse_options_view const options,
                                           device_span<char const> const data,
                                           device_span<uint64_t const> const row_offsets,
                                           unsigned long long int* keys_cnt,
-                                          thrust::optional<mutable_table_device_view> keys_info)
+                                          std::optional<mutable_table_device_view> keys_info)
 {
   auto const rec_id = grid_1d::global_thread_id();
   if (rec_id >= row_offsets.size()) return;
@@ -596,7 +596,7 @@ void collect_keys_info(parse_options_view const& options,
                        device_span<char const> const data,
                        device_span<uint64_t const> const row_offsets,
                        unsigned long long int* keys_cnt,
-                       thrust::optional<mutable_table_device_view> keys_info,
+                       std::optional<mutable_table_device_view> keys_info,
                        rmm::cuda_stream_view stream)
 {
   int block_size;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2023, NVIDIA CORPORATION.
+ * Copyright (c) 2020-2024, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 #include <cudf/utilities/error.hpp>
 #include <cudf/utilities/type_dispatcher.hpp>
 
-#include <thrust/optional.h>
+#include <optional>
 
 #include <cuda/std/type_traits>
 
@@ -35,14 +35,14 @@ namespace ast {
 
 namespace detail {
 
-// Type trait for wrapping nullable types in a thrust::optional. Non-nullable
+// Type trait for wrapping nullable types in a std::optional. Non-nullable
 // types are returned as is.
 template <typename T, bool has_nulls>
 struct possibly_null_value;
 
 template <typename T>
 struct possibly_null_value<T, true> {
-  using type = thrust::optional<T>;
+  using type = std::optional<T>;
 };
 
 template <typename T>

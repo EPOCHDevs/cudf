@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023, NVIDIA CORPORATION.
+ * Copyright (c) 2019-2024, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
 #include <cudf/utilities/error.hpp>
 #include <io/comp/io_uncomp.hpp>
 
-#include <thrust/optional.h>
+#include <optional>
 
 #include <algorithm>
 #include <cstddef>
@@ -691,11 +691,11 @@ class metadata {
  * @brief `column_device_view` and additional, ORC specific, information on the column.
  */
 struct orc_column_device_view : public column_device_view {
-  __device__ orc_column_device_view(column_device_view col, thrust::optional<uint32_t> parent_idx)
+  __device__ orc_column_device_view(column_device_view col, std::optional<uint32_t> parent_idx)
     : column_device_view{col}, parent_index{parent_idx}
   {
   }
-  thrust::optional<uint32_t> parent_index;
+  std::optional<uint32_t> parent_index;
   bitmask_type const* pushdown_mask = nullptr;
 };
 

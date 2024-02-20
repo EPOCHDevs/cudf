@@ -24,8 +24,8 @@
 
 #include <rmm/device_scalar.hpp>
 
+#include <optional>
 #include <thrust/iterator/iterator_traits.h>
-#include <thrust/optional.h>
 
 namespace cudf {
 namespace detail {
@@ -67,8 +67,7 @@ __launch_bounds__(block_size) CUDF_KERNEL
   size_type warp_cur = warp_begin + warp_id;
   size_type index    = tid;
   while (warp_cur <= warp_end) {
-    auto const opt_value =
-      (index < end) ? (filter(index) ? lhs[index] : rhs[index]) : thrust::nullopt;
+    auto const opt_value = (index < end) ? (filter(index) ? lhs[index] : rhs[index]) : std::nullopt;
     if (opt_value) { out.element<T>(index) = static_cast<T>(*opt_value); }
 
     // update validity
@@ -154,7 +153,7 @@ std::unique_ptr<column> copy_if_else(bool nullable,
                                      rmm::cuda_stream_view stream,
                                      rmm::mr::device_memory_resource* mr)
 {
-  // This is the type of the thrust::optional element in the passed iterators
+  // This is the type of the std::optional element in the passed iterators
   using Element = typename thrust::iterator_traits<LeftIter>::value_type::value_type;
 
   size_type size           = std::distance(lhs_begin, lhs_end);

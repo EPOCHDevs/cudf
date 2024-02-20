@@ -36,7 +36,7 @@
 #include <thrust/for_each.h>
 #include <thrust/generate.h>
 #include <thrust/iterator/counting_iterator.h>
-#include <thrust/optional.h>
+#include <optional>
 #include <thrust/transform.h>
 
 #include <cuda/std/climits>

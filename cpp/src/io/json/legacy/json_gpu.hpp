@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2023, NVIDIA CORPORATION.
+ * Copyright (c) 2020-2024, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@
 
 #include <rmm/cuda_stream_view.hpp>
 
-#include <thrust/optional.h>
+#include <optional>
 
 using cudf::device_span;
 
@@ -94,7 +94,7 @@ void collect_keys_info(parse_options_view const& options,
                        device_span<char const> data,
                        device_span<uint64_t const> row_offsets,
                        unsigned long long int* keys_cnt,
-                       thrust::optional<mutable_table_device_view> keys_info,
+                       std::optional<mutable_table_device_view> keys_info,
                        rmm::cuda_stream_view stream);
 
 }  // namespace cudf::io::json::detail::legacy

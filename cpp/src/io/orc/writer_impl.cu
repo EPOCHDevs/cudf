@@ -39,6 +39,7 @@
 #include <rmm/device_buffer.hpp>
 #include <rmm/device_uvector.hpp>
 
+#include <optional>
 #include <thrust/execution_policy.h>
 #include <thrust/extrema.h>
 #include <thrust/for_each.h>
@@ -47,7 +48,6 @@
 #include <thrust/iterator/counting_iterator.h>
 #include <thrust/iterator/reverse_iterator.h>
 #include <thrust/iterator/transform_iterator.h>
-#include <thrust/optional.h>
 #include <thrust/pair.h>
 #include <thrust/reduce.h>
 #include <thrust/scan.h>
@@ -1820,7 +1820,7 @@ orc_table_view make_orc_table_view(table_view const& table,
     type_kinds, stream, rmm::mr::get_current_device_resource());
 
   rmm::device_uvector<orc_column_device_view> d_orc_columns(orc_columns.size(), stream);
-  using stack_value_type = thrust::pair<column_device_view const*, thrust::optional<uint32_t>>;
+  using stack_value_type = thrust::pair<column_device_view const*, std::optional<uint32_t>>;
   rmm::device_uvector<stack_value_type> stack_storage(orc_columns.size(), stream);
 
   // pre-order append ORC device columns
@@ -1836,7 +1836,7 @@ orc_table_view make_orc_table_view(table_view const& table,
                        thrust::make_reverse_iterator(d_table.end()),
                        thrust::make_reverse_iterator(d_table.begin()),
                        [&stack](column_device_view const& c) {
-                         stack.push({&c, thrust::nullopt});
+                         stack.push({&c, std::nullopt});
                        });
 
       uint32_t idx = 0;

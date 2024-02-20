@@ -47,7 +47,7 @@
 #include <thrust/host_vector.h>
 #include <thrust/iterator/constant_iterator.h>
 #include <thrust/iterator/counting_iterator.h>
-#include <thrust/optional.h>
+#include <optional>
 #include <thrust/pair.h>
 #include <thrust/sort.h>
 #include <thrust/transform.h>

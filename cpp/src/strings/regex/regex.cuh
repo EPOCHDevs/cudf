@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2023, NVIDIA CORPORATION.  All rights reserved.
+ * Copyright (c) 2019-2024, NVIDIA CORPORATION.  All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
 
 #include <rmm/cuda_stream_view.hpp>
 
-#include <thrust/optional.h>
+#include <optional>
 #include <thrust/pair.h>
 
 #include <cuda_runtime.h>
@@ -37,7 +37,7 @@ namespace detail {
 struct relist;
 
 using match_pair   = thrust::pair<cudf::size_type, cudf::size_type>;
-using match_result = thrust::optional<match_pair>;
+using match_result = std::optional<match_pair>;
 
 constexpr int32_t MAX_SHARED_MEM      = 2048;  ///< Memory size for storing prog instruction data
 constexpr std::size_t MAX_WORKING_MEM = 0x01'FFFF'FFFF;  ///< Memory size for state data

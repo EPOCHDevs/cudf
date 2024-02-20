@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2023, NVIDIA CORPORATION.
+ * Copyright (c) 2021-2024, NVIDIA CORPORATION.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@
 #include <rmm/device_uvector.hpp>
 #include <rmm/exec_policy.hpp>
 
+#include <optional>
 #include <thrust/advance.h>
 #include <thrust/binary_search.h>
 #include <thrust/distance.h>
@@ -34,7 +35,6 @@
 #include <thrust/for_each.h>
 #include <thrust/iterator/counting_iterator.h>
 #include <thrust/iterator/transform_iterator.h>
-#include <thrust/optional.h>
 #include <thrust/scan.h>
 #include <thrust/transform.h>
 
@@ -57,8 +57,8 @@ std::unique_ptr<table> build_table(
   size_type const explode_column_idx,
   column_view const& sliced_child,
   cudf::device_span<size_type const> gather_map,
-  thrust::optional<cudf::device_span<size_type const>> explode_col_gather_map,
-  thrust::optional<rmm::device_uvector<size_type>> position_array,
+  std::optional<cudf::device_span<size_type const>> explode_col_gather_map,
+  std::optional<rmm::device_uvector<size_type>> position_array,
   rmm::cuda_stream_view stream,
   rmm::mr::device_memory_resource* mr)
 {
@@ -143,8 +143,8 @@ std::unique_ptr<table> explode(table_view const& input_table,
                      explode_column_idx,
                      sliced_child,
                      gather_map,
-                     thrust::nullopt,
-                     thrust::nullopt,
+                     std::nullopt,
+                     std::nullopt,
                      stream,
                      mr);
 }
@@ -193,7 +193,7 @@ std::unique_ptr<table> explode_position(table_view const& input_table,
                      explode_column_idx,
                      sliced_child,
                      gather_map,
-                     thrust::nullopt,
+                     std::nullopt,
                      std::move(pos),
                      stream,
                      mr);
@@ -292,7 +292,7 @@ std::unique_ptr<table> explode_outer(table_view const& input_table,
     sliced_child,
     gather_map,
     explode_col_gather_map,
-    include_position ? std::move(pos) : thrust::optional<rmm::device_uvector<size_type>>{},
+    include_position ? std::move(pos) : std::optional<rmm::device_uvector<size_type>>{},
     stream,
     mr);
 }
