@@ -193,7 +193,7 @@ include(cmake/thirdparty/get_cccl.cmake)
 # find rmm
 include(cmake/thirdparty/get_rmm.cmake)
 # find arrow
-include(cmake/thirdparty/get_arrow.cmake)
+# include(cmake/thirdparty/get_arrow.cmake)
 # find flatbuffers
 include(cmake/thirdparty/get_flatbuffers.cmake)
 # find dlpack
