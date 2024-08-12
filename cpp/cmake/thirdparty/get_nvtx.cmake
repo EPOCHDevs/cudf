@@ -1,5 +1,5 @@
 # =============================================================================
-# Copyright (c) 2018-2024, NVIDIA CORPORATION.
+# Copyright (c) 2024, NVIDIA CORPORATION.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
 # in compliance with the License. You may obtain a copy of the License at
@@ -11,9 +11,17 @@
 # or implied. See the License for the specific language governing permissions and limitations under
 # the License.
 # =============================================================================
-if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/CUDF_RAPIDS.cmake)
-  file(DOWNLOAD https://raw.githubusercontent.com/rapidsai/rapids-cmake/branch-24.04/RAPIDS.cmake
-       ${CMAKE_CURRENT_BINARY_DIR}/CUDF_RAPIDS.cmake
+
+# This function finds NVTX and sets any additional necessary environment variables.
+function(find_and_configure_nvtx)
+  rapids_cpm_find(
+    NVTX3 3.1.0
+    GLOBAL_TARGETS nvtx3-c nvtx3-cpp
+    CPM_ARGS
+    GIT_REPOSITORY https://github.com/NVIDIA/NVTX.git
+    GIT_TAG v3.1.0
+    GIT_SHALLOW TRUE SOURCE_SUBDIR c
   )
-endif()
-include(${CMAKE_CURRENT_BINARY_DIR}/CUDF_RAPIDS.cmake)
+endfunction()
+
+find_and_configure_nvtx()
