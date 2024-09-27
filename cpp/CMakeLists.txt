@@ -215,6 +215,8 @@ include(cmake/thirdparty/get_kvikio.cmake)
 # include(cmake/thirdparty/get_fmt.cmake)
 # find spdlog
 # include(cmake/thirdparty/get_spdlog.cmake)
+find_package(fmt CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
 # find nanoarrow
 include(cmake/thirdparty/get_nanoarrow.cmake)
 # find thread_pool
