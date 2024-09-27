@@ -211,9 +211,9 @@ include(cmake/thirdparty/get_cufile.cmake)
 # find KvikIO
 include(cmake/thirdparty/get_kvikio.cmake)
 # find fmt
-include(cmake/thirdparty/get_fmt.cmake)
+# include(cmake/thirdparty/get_fmt.cmake)
 # find spdlog
-include(cmake/thirdparty/get_spdlog.cmake)
+# include(cmake/thirdparty/get_spdlog.cmake)
 # find nanoarrow
 include(cmake/thirdparty/get_nanoarrow.cmake)
 # find thread_pool
