@@ -13,6 +13,7 @@
 # =============================================================================
 
 cmake_minimum_required(VERSION 3.26.4 FATAL_ERROR)
+set(CMAKE_TOOLCHAIN_FILE $ENV{HOME}/vcpkg/scripts/buildsystems/vcpkg.cmake CACHE STRING "Vcpkg toolchain file")
 
 include(../rapids_config.cmake)
 include(rapids-cmake)
